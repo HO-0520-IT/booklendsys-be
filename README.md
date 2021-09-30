@@ -10,7 +10,7 @@
 
 ## 謝辞
 
-このプログラムは、基本的な考え方を [matsu7089](https://github.com/matsu7089) 氏の [gas-account-book](https://github.com/matsu7089/gas-account-book) より参考にして制作されています。
+このプログラムの情報入出力機能は、 [matsu7089](https://github.com/matsu7089) 氏の [gas-account-book](https://github.com/matsu7089/gas-account-book) を参考にして制作されています。
 
 [matsu7089](https://github.com/matsu7089) 氏に、深く感謝の意を示します。
 
