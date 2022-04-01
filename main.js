@@ -226,11 +226,14 @@ function getBookList(params) {
   }
 
   var bookListAll = opSheet_book.getDataRange().getValues();
+  //見出しからキー値を作成
   var bookListKey = bookListAll[0].filter(element => {
     return element;
   });
+  //データは見出し不要につき、1行目を削除
   bookListAll = bookListAll.slice(1);
 
+  //UUIDListの見出しを切り、 [bookUUID]<->[isLent] になるようなデータ UUIDListObj を作成
   var UUIDListAll = opSheet_UUID.getDataRange().getValues().slice(1);
   var UUIDListObj = {};
   UUIDListAll.forEach(element => {
