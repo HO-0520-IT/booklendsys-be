@@ -123,8 +123,8 @@ function deleteBook(params) {
 
 function addUser(params) {
   var userID = params.userID;
-  var ChkUserID = opSheet_user.getRange(2, 1, opSheet_user.getLastRow - 1);
-  if (ChkUserID.includes(userID) || ChkUserID.includes("-1")) {
+  var ChkUserID = opSheet_user.getRange(2, 1, opSheet_user.getLastRow() - 1).getValues();
+  if ((ChkUserID.flat().includes(userID)) || (ChkUserID.flat().includes("-1"))) {
     return response({ error : "UserID duplicated" });
   }
   var userName = params.userName;
