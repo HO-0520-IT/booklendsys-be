@@ -127,12 +127,25 @@ function addUser(params) {
   if ((ChkUserID.flat().includes(userID)) || (ChkUserID.flat().includes("-1"))) {
     return response({ error : "UserID duplicated" });
   }
+  /*
   var userName = params.userName;
   var userDesc = params.userDesc;
   var userImageURL = params.userImageURL;
   var userAddDate = params.userAddDate;
+  */
+  var userListAll = opSheet_user.getDataRange().getValues();
+  //見出しからキー値を作成
+  var userListKey = userListAll[0].filter(element => {
+    return element;
+  });
+  //appendRow 用に、キー値と一致した値を配列に格納
+  var addUserData = [];
+  userListKey.forEach(function(key, index) {
+    addUserData[index] = params[key];
+  });
+  opSheet_user.appendRow(addUserData);
 
-  opSheet_user.appendRow([userID, userName, userDesc, userImageURL, userAddDate]);
+  //opSheet_user.appendRow([userID, userName, userDesc, userImageURL, userAddDate]);
   return response({ success : userID });
 }
 
@@ -145,7 +158,7 @@ function deleteUser(params) {
   if (ChkuserID_user_FoundAt == -1) {
     return response({ error : "UserID not found" });
   }
-  if (ChkuserID_UUID_FoundAt != []) {
+  if (ChkuserID_UUID_FoundAt.toString() != "") {
     return response({ error : "Book still lent" });
   }
 
