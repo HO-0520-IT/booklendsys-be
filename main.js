@@ -65,19 +65,6 @@ function addBook(params) {
   }
   params["UUID"] = UUIDArray.join(",");
 
-  /*
-  var bookType = params.bookType;
-  var bookID = params.bookID;
-  var bookTitle = params.bookTitle;
-  var bookAuthor = params.bookAuthor;
-  var bookPublishedYear = params.bookPublishedYear;
-  var bookPublishedMonth = params.bookPublishedMonth;
-  var bookDesc = params.bookDesc;
-  var bookImageURL = params.bookImageURL;
-  var bookAddedBy = params.bookAddedBy;
-  var bookComment = params.bookComment;
-  */
-  // var isLent = params.isLent;
   var bookListAll = opSheet_book.getDataRange().getValues();
   //見出しからキー値を作成
   var bookListKey = bookListAll[0].filter(element => {
@@ -88,9 +75,8 @@ function addBook(params) {
   bookListKey.forEach(function(key, index) {
     addBookData[index] = params[key];
   });
-  opSheet_book.appendRow(addBookData);
 
-  //opSheet_book.appendRow([bookStockNum, bookUUID, bookType, bookID, bookTitle, bookAuthor, bookPublishedYear, bookPublishedMonth, bookDesc, bookImageURL, bookAddedBy, bookComment]);
+  opSheet_book.appendRow(addBookData);
   for (i = 0; i < bookStockNum; i++) {
     opSheet_UUID.appendRow([UUIDArray[i], -1]);
   }
@@ -141,12 +127,7 @@ function addUser(params) {
   if ((ChkUserID.flat().includes(userID)) || (ChkUserID.flat().includes("-1"))) {
     return response({ error : "UserID duplicated" });
   }
-  /*
-  var userName = params.userName;
-  var userDesc = params.userDesc;
-  var userImageURL = params.userImageURL;
-  var userAddDate = params.userAddDate;
-  */
+
   var userListAll = opSheet_user.getDataRange().getValues();
   //見出しからキー値を作成
   var userListKey = userListAll[0].filter(element => {
@@ -157,9 +138,8 @@ function addUser(params) {
   userListKey.forEach(function(key, index) {
     addUserData[index] = params[key];
   });
-  opSheet_user.appendRow(addUserData);
 
-  //opSheet_user.appendRow([userID, userName, userDesc, userImageURL, userAddDate]);
+  opSheet_user.appendRow(addUserData);
   return response({ success : userID });
 }
 
@@ -216,24 +196,6 @@ function returnBook(params) {
   if (opSheet_UUID.getRange(ChkUUID_UUID_FoundAt, 2) == "-1") {
     return response({ error : "Book not lent" });
   }
-
-  /*
-    var ChkuserID_user_FoundAt = CheckUserExists(userID);
-    var ChkuserID_UUID_FoundAt = CheckUserBorrowsBook(userID);
-
-    //Check what book is lent by that user
-    var ChkuserID_UUID_BookUUID = ChkuserID_UUID_FoundAt.filter(element => {
-      return opSheet_UUID.getRange(element, 1);
-    });
-
-    if (ChkuserID_user_FoundAt == -1) {
-      return response({ error : "UserID not found" });
-    }
-    //Check whether the book is lent by that user
-    if (!ChkuserID_UUID_BookUUID.includes(bookUUID)) {
-      return response({ error : "Book not lent" });
-    }
-  */
 
   opSheet_UUID.getRange(ChkUUID_UUID_FoundAt, 2).setValue(-1);
   return response({ success : bookUUID });
