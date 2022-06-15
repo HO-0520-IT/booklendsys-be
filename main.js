@@ -193,7 +193,7 @@ function returnBook(params) {
   if (ChkUUID_UUID_FoundAt == -1 || ChkUUID_book_FoundAt == -1) {
     return response({ error : "UUID not found" });
   }
-  if (opSheet_UUID.getRange(ChkUUID_UUID_FoundAt, 2) == "-1") {
+  if (opSheet_UUID.getRange(ChkUUID_UUID_FoundAt, 2).getValue() == "-1") {
     return response({ error : "Book not lent" });
   }
 
